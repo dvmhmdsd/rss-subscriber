@@ -38,13 +38,18 @@ export const loader: LoaderFunction = () => {
 
 export default function Index() {
   const { name } = useLoaderData<typeof loader>();
-  const {t} = useTranslation();
+  const {
+    t,
+    i18n: { changeLanguage, language },
+  } = useTranslation();
   return (
     <div className="text-center">
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
         {name}
       </h1>
-      <Button>{t('click')}</Button>
+      <Button onClick={() => changeLanguage(language === "en" ? "ar" : "en")}>
+        {t("lang")}
+      </Button>
     </div>
   );
 }
