@@ -1,5 +1,6 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { Button } from "~/components/ui/button";
 
 export const meta: MetaFunction = () => {
   return [
@@ -21,8 +22,9 @@ export const loader: LoaderFunction = () => {
 export default function Index() {
   const { name } = useLoaderData<typeof loader>();
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1 className="text-3xl font-bold underline text-center my-4">{name}</h1>
+    <div className="text-center">
+      <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">{name}</h1>
+      <Button>Click</Button>
     </div>
   );
 }

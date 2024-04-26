@@ -6,7 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import stylesheet from "~/tailwind.css?url";
+import stylesheet from "~/globals.css?url";
 
 export function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
