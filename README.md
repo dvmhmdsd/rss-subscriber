@@ -1,6 +1,6 @@
-# Welcome to Remix + Vite!
+# SSR Subscriber
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+A web app that lets you subscribe to any youtube channel without clicking the subscribe button
 
 ## Development
 
@@ -10,27 +10,10 @@ Run the Vite dev server:
 npm run dev
 ```
 
-## Deployment
+## Test
 
-First, build your app for production:
+Run the unit tests to test `loaders` & `actions`
 
-```sh
-npm run build
+```shellscript
+npm run test
 ```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
