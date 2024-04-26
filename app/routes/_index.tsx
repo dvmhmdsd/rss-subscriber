@@ -1,5 +1,6 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { useTranslation } from "react-i18next";
 import { Button } from "~/components/ui/button";
 
 export const meta: MetaFunction = () => {
@@ -37,12 +38,13 @@ export const loader: LoaderFunction = () => {
 
 export default function Index() {
   const { name } = useLoaderData<typeof loader>();
+  const {t} = useTranslation();
   return (
     <div className="text-center">
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
         {name}
       </h1>
-      <Button>Click</Button>
+      <Button>{t('click')}</Button>
     </div>
   );
 }
