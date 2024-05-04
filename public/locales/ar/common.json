@@ -1,3 +1,7 @@
 {
-  "lang": "English"
+  "lang": "English",
+  "youtube_link_label": "أدخل رابط قناة اليوتيوب التي تريد الاشتراك فيها",
+  "subscribe": "اشتراك",
+  "subscribing": "جاري الاشتراك...",
+  "e.g": "علي سبيل المثال: https://youtube.com/@ahmedalemam"
 }

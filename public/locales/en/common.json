@@ -1,3 +1,7 @@
 {
-  "lang": "العربية"
+  "lang": "العربية",
+  "youtube_link_label": "Enter Youtube Channel Link you want to subscribe to",
+  "subscribe": "Subscribe",
+  "subscribing": "Subscribing...",
+  "e.g": "e.g. https://youtube.com/@ahmedalemam"
 }
