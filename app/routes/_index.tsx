@@ -6,6 +6,7 @@ import type {
 } from "@remix-run/node";
 import {
   Form,
+  Link,
   json,
   useActionData,
   useLoaderData,
@@ -165,6 +166,7 @@ export function ErrorBoundary() {
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
         {t("rss_link_error")}
       </h1>
+      <Link to="/">{t("back_to_home")}</Link>
     </div>
   );
 }

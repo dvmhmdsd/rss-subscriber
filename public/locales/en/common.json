@@ -3,5 +3,7 @@
   "youtube_link_label": "Enter Youtube Channel Link you want to subscribe to",
   "subscribe": "Subscribe",
   "subscribing": "Subscribing...",
-  "e.g": "e.g. https://youtube.com/@ahmedalemam"
+  "e.g": "e.g. https://youtube.com/@ahmedalemam",
+  "rss_link_error": "An unexpected error occurred",
+  "back_to_home": "Back to Home"
 }
