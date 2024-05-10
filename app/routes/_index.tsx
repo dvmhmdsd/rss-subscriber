@@ -21,7 +21,12 @@ import { Label } from "~/components/ui/label";
 import { Skeleton } from "~/components/ui/skeleton";
 import { extractRssLink, isValidYoutubeChannelLink } from "~/lib/utils";
 import mainPageCss from "~/styles/main-page.css?url";
-import { CopyIcon, CheckIcon } from "@radix-ui/react-icons";
+import {
+  CopyIcon,
+  CheckIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon,
+} from "@radix-ui/react-icons";
 
 export const meta: MetaFunction = () => [
   { title: "RSS Subscriber" },
@@ -52,6 +57,8 @@ export const loader: LoaderFunction = () => ({
   name: "Welcome to the RSS subscriber",
 });
 
+const CHANNELS_KEY = "channels_links";
+
 export default function Index() {
   const { name } = useLoaderData<typeof loader>();
   const {
@@ -71,6 +78,11 @@ export default function Index() {
   useEffect(() => {
     if (data?.error) inputRef.current?.focus();
   }, [data?.error]);
+
+  useEffect(() => {
+    if (isLinkAvailable)
+      localStorage.setItem(CHANNELS_KEY, data?.rssLink ?? "");
+  }, [isLinkAvailable, data?.rssLink]);
 
   const handleCopyBtnClick = () => {
     setClicked(true);
@@ -136,6 +148,17 @@ export default function Index() {
             </CardFooter>
           )}
         </Card>
+      )}
+
+      {isLinkAvailable && (
+        <div className="text-center mt-10">
+          <Button variant="ghost" className="text-center mt-10">
+            <Link to={`/subscription-page?link=${data?.rssLink}`} className="flex gap-1 items-center">
+              {t("go_channel_content")}{" "}
+              {language === "ar" ? <ArrowLeftIcon /> : <ArrowRightIcon />}
+            </Link>
+          </Button>
+        </div>
       )}
     </>
   );

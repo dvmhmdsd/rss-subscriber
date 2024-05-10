@@ -12,3 +12,5 @@ export function extractRssLink(text: string) {
 export function isValidYoutubeChannelLink(url: string) {
   return url.includes("youtube.com") && url.includes("/@");
 }
+
+

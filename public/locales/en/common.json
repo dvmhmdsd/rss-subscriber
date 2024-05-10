@@ -4,6 +4,8 @@
   "subscribe": "Subscribe",
   "subscribing": "Subscribing...",
   "e.g": "e.g. https://youtube.com/@ahmedalemam",
-  "rss_link_error": "An unexpected error occurred",
-  "back_to_home": "Back to Home"
+  "rss_link_error": "Unexpected error occurred",
+  "network_error": "Check your connection",
+  "back_to_home": "Back to Home",
+  "go_channel_content": "Goto channel content"
 }

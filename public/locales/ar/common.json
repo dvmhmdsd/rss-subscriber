@@ -5,5 +5,7 @@
   "subscribing": "جاري الاشتراك...",
   "e.g": "علي سبيل المثال: https://youtube.com/@ahmedalemam",
   "rss_link_error": "حدثت مشكلة غير متوقعه",
-  "back_to_home": "العودة للصفحة الرئيسية"
+  "back_to_home": "العودة للصفحة الرئيسية",
+  "go_channel_content": "الذهاب لمحتوى القناة",
+  "network_error": "تأكد من اتصالك بالانترنت"
 }
