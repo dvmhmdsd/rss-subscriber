@@ -1,6 +1,6 @@
 # SSR Subscriber
 
-A web app that lets you subscribe to any youtube channel without clicking the subscribe button
+A web app that lets you subscribe to any youtube channel without clicking the subscribe button on youtube
 
 ## Development
 
