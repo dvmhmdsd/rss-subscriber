@@ -37,28 +37,24 @@ export const meta: MetaFunction = () => [
 ];
 
 export const loader: LoaderFunction = async ({
-  request,
+  params,
 }: LoaderFunctionArgs) => {
-  const { searchParams } = new URL(request.url);
   const parser = new Parser({});
   try {
-    const feed = await parser.parseURL(searchParams.get("link")!);
-    return json({ link: searchParams.get("link"), feed, error: "" });
+    const feed = await parser.parseURL(params.link!);
+    return json({ feed, error: "" });
   } catch (error) {
-    return json({ link: "", feed: "", error });
+    return json({ feed: "", error });
   }
 };
 
 export default function SubscriptionPage() {
-  const { feed, error, link } = useLoaderData<typeof loader>();
+  const { feed, error } = useLoaderData<typeof loader>();
   const { t } = useTranslation();
 
   return (
     <>
-      {!link && (
-        <>Show channels list</>
-      )}
-      {link && feed && <ChannelDetails feed={feed} />}
+      {feed && <ChannelDetails feed={feed} />}
       {error && error.code === "ENOTFOUND" && (
         <ErrorComponent
           error={t("network_error")}
