@@ -12,7 +12,7 @@ import {
   useLoaderData,
   useNavigation,
 } from "@remix-run/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
@@ -22,11 +22,10 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { extractRssLink, isValidYoutubeChannelLink } from "~/lib/utils";
 import mainPageCss from "~/styles/main-page.css?url";
 import {
-  CopyIcon,
-  CheckIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
 } from "@radix-ui/react-icons";
+import LinkResult from "~/components/custom/LinkResult";
 
 export const meta: MetaFunction = () => [
   { title: "RSS Subscriber" },
@@ -69,8 +68,6 @@ export default function Index() {
 
   const data = useActionData<typeof action>();
 
-  const [clicked, setClicked] = useState(false);
-
   const transition = useNavigation();
   const isSubmitting = transition.state === "submitting";
   const isLinkAvailable = data?.rssLink && transition.state === "idle";
@@ -84,24 +81,16 @@ export default function Index() {
       localStorage.setItem(CHANNELS_KEY, data?.rssLink ?? "");
   }, [isLinkAvailable, data?.rssLink]);
 
-  const handleCopyBtnClick = () => {
-    setClicked(true);
-    navigator.clipboard.writeText(data?.rssLink ?? "");
-    setTimeout(() => {
-      setClicked(false);
-    }, 1000);
-  };
-
   return (
     <>
-      <div className="text-center mb-7">
+      <header className="text-center mb-7">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
           {name}
         </h1>
         <Button onClick={() => changeLanguage(language === "en" ? "ar" : "en")}>
           {t("lang")}
         </Button>
-      </div>
+      </header>
       {transition.state === "loading" ? (
         <Skeleton className="w-[100px] h-[20px] rounded-full" />
       ) : (
@@ -135,16 +124,7 @@ export default function Index() {
           </CardContent>
           {isLinkAvailable && (
             <CardFooter>
-              <div className="rounded-md border px-4 py-1 text-sm m-auto w-full flex justify-between items-center">
-                {data?.rssLink}
-                <Button
-                  variant="ghost"
-                  onClick={handleCopyBtnClick}
-                  aria-label="Copy"
-                >
-                  {clicked ? <CheckIcon color="green" /> : <CopyIcon />}
-                </Button>
-              </div>
+              <LinkResult link={data?.rssLink} />
             </CardFooter>
           )}
         </Card>
@@ -153,7 +133,10 @@ export default function Index() {
       {isLinkAvailable && (
         <div className="text-center mt-10">
           <Button variant="ghost" className="text-center mt-10">
-            <Link to={`/subscription-page?link=${data?.rssLink}`} className="flex gap-1 items-center">
+            <Link
+              to={`/subscription-page?link=${data?.rssLink}`}
+              className="flex gap-1 items-center"
+            >
               {t("go_channel_content")}{" "}
               {language === "ar" ? <ArrowLeftIcon /> : <ArrowRightIcon />}
             </Link>

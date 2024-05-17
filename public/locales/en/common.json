@@ -7,5 +7,8 @@
   "rss_link_error": "Unexpected error occurred",
   "network_error": "Check your connection",
   "back_to_home": "Back to Home",
-  "go_channel_content": "Goto channel content"
+  "go_channel_content": "Goto channel content",
+  "channel_rss": "The channel RSS link",
+  "videos": "Videos",
+  "no_items": "No videos found"
 }

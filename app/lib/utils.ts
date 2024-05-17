@@ -13,4 +13,7 @@ export function isValidYoutubeChannelLink(url: string) {
   return url.includes("youtube.com") && url.includes("/@");
 }
 
-
+export function formatIsoDateToNormalDateAndTime(date: string) {
+  const d = new Date(date);
+  return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+}

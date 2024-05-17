@@ -8,6 +8,7 @@ import { Link, json, useLoaderData } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
 import mainPageCss from "~/styles/main-page.css?url";
 import Parser from "rss-parser";
+import { ChannelDetails } from "~/components/custom/ChannelDetails";
 
 export const meta: MetaFunction = () => [
   { title: "RSS Subscriber" },
@@ -49,18 +50,20 @@ export const loader: LoaderFunction = async ({
 };
 
 export default function SubscriptionPage() {
-  const { link, feed, error } = useLoaderData<typeof loader>();
+  const { feed, error, link } = useLoaderData<typeof loader>();
   const { t } = useTranslation();
-  console.log(link, feed);
+
   return (
     <>
+      {!link && (
+        <>Show channels list</>
+      )}
+      {link && feed && <ChannelDetails feed={feed} />}
       {error && error.code === "ENOTFOUND" && (
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
-            {t("network_error")}
-          </h1>
-          <Link to="/">{t("back_to_home")}</Link>
-        </div>
+        <ErrorComponent
+          error={t("network_error")}
+          linkText={t("back_to_home")}
+        />
       )}
     </>
   );
@@ -69,14 +72,24 @@ export default function SubscriptionPage() {
 export function ErrorBoundary() {
   const { t } = useTranslation();
   return (
-    <div className="text-center">
-      <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
-        {t("rss_link_error")}
-      </h1>
-      <Link to="/">{t("back_to_home")}</Link>
-    </div>
+    <ErrorComponent error={t("rss_link_error")} linkText={t("back_to_home")} />
   );
 }
+
+const ErrorComponent = ({
+  error,
+  linkText,
+}: {
+  error: string;
+  linkText: string;
+}) => (
+  <div className="text-center">
+    <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
+      {error}
+    </h1>
+    <Link to="/">{linkText}</Link>
+  </div>
+);
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: mainPageCss }];
