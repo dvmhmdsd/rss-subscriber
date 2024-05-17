@@ -4,26 +4,30 @@ import { Link } from "@remix-run/react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { formatIsoDateToNormalDateAndTime } from "~/lib/utils";
 import { useTranslation } from "react-i18next";
+import { Button } from "../ui/button";
 
 export const ChannelDetails = ({
   feed,
 }: {
   feed: { title: string; link: string; items: FeedItem[] };
 }) => {
-  const {
-    t,
-  } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className="container text-left mx-auto my-9">
       <header>
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl flex items-center mb-7 hover:text-slate-700">
-            <Link to={feed.link} target="_blank" rel="noopener noreferrer">
-              {feed.title}
-            </Link>
-            <p className="ml-2">
-              <ExternalLinkIcon />
-            </p>
-          </h1>
+        <section className="flex justify-between items-center">
+        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl flex items-center mb-7 hover:text-slate-700">
+          <Link to={feed.link} target="_blank" rel="noopener noreferrer">
+            {feed.title}
+          </Link>
+          <p className="ml-2">
+            <ExternalLinkIcon />
+          </p>
+        </h1>
+        <Button variant="outline">
+          <Link to="/">{t('back_to_home')}</Link>
+        </Button>
+        </section>
       </header>
       <section>
         <ul>
@@ -45,8 +49,8 @@ export const ChannelDetails = ({
 const ChannelCard = ({ channelData }: { channelData: FeedItem }) => {
   return (
     <li key={channelData.link}>
-      <Link to={channelData.link} target="_blank" rel="noopener noreferrer">
-        <Card className="w-5/6 mx-auto py-4 mb-2 hover:bg-slate-50 cursor-pointer">
+      <Card className="w-5/6 py-4 mb-2 hover:bg-slate-50 cursor-pointer">
+        <Link to={channelData.link} target="_blank" rel="noopener noreferrer">
           <CardHeader className="text-xl">{channelData.title}</CardHeader>
           <CardContent>
             <p className="text-sm text-gray-700">
@@ -57,8 +61,8 @@ const ChannelCard = ({ channelData }: { channelData: FeedItem }) => {
               </time>
             </p>
           </CardContent>
-        </Card>
-      </Link>
+        </Link>
+      </Card>
     </li>
   );
 };

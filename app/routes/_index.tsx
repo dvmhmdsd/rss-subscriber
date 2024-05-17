@@ -27,6 +27,8 @@ import {
 import mainPageCss from "~/styles/main-page.css?url";
 import { ArrowRightIcon, ArrowLeftIcon } from "@radix-ui/react-icons";
 import LinkResult from "~/components/custom/LinkResult";
+import { ErrorComponent } from "~/components/custom/ErrorComponent";
+import { WithLoading } from "~/components/HOCs/WithLoading";
 
 export const meta: MetaFunction = () => [
   { title: "RSS Subscriber" },
@@ -80,7 +82,7 @@ export default function Index() {
   }, [isLinkAvailable, data?.rssLink]);
 
   return (
-    <>
+    <WithLoading>
       <header className="text-center mb-7">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
           {name}
@@ -105,7 +107,7 @@ export default function Index() {
                 name="youtubeChannelLink"
                 className="rss-link_input mt-0"
                 aria-label="Youtube Channel Link"
-                aria-placeholder="e.g. https://www.youtube.com/@ahmedalemam"
+                aria-placeholder="e.g. https://www.youtube.com/@ahmedelemam"
                 aria-labelledby="youtubeChannelLink"
                 aria-invalid={data?.error ? true : undefined}
               />
@@ -141,7 +143,7 @@ export default function Index() {
           </Button>
         </div>
       )}
-    </>
+    </WithLoading>
   );
 }
 
@@ -166,12 +168,7 @@ export async function action({ request }: ActionFunctionArgs) {
 export function ErrorBoundary() {
   const { t } = useTranslation();
   return (
-    <div className="text-center">
-      <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
-        {t("rss_link_error")}
-      </h1>
-      <Link to="/">{t("back_to_home")}</Link>
-    </div>
+    <ErrorComponent error={t("rss_link_error")} linkText={t("back_to_home")} />
   );
 }
 

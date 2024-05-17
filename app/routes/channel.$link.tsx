@@ -4,11 +4,13 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { Link, json, useLoaderData } from "@remix-run/react";
+import { json, useLoaderData } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
 import mainPageCss from "~/styles/main-page.css?url";
 import Parser from "rss-parser";
 import { ChannelDetails } from "~/components/custom/ChannelDetails";
+import { ErrorComponent } from "~/components/custom/ErrorComponent";
+import { WithLoading } from "~/components/HOCs/WithLoading";
 
 export const meta: MetaFunction = () => [
   { title: "RSS Subscriber" },
@@ -53,7 +55,7 @@ export default function SubscriptionPage() {
   const { t } = useTranslation();
 
   return (
-    <>
+    <WithLoading>
       {feed && <ChannelDetails feed={feed} />}
       {error && error.code === "ENOTFOUND" && (
         <ErrorComponent
@@ -61,7 +63,7 @@ export default function SubscriptionPage() {
           linkText={t("back_to_home")}
         />
       )}
-    </>
+    </WithLoading>
   );
 }
 
@@ -71,21 +73,6 @@ export function ErrorBoundary() {
     <ErrorComponent error={t("rss_link_error")} linkText={t("back_to_home")} />
   );
 }
-
-const ErrorComponent = ({
-  error,
-  linkText,
-}: {
-  error: string;
-  linkText: string;
-}) => (
-  <div className="text-center">
-    <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
-      {error}
-    </h1>
-    <Link to="/">{linkText}</Link>
-  </div>
-);
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: mainPageCss }];
