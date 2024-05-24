@@ -78,10 +78,7 @@ export default function Index() {
           >
             {t("lang")}
           </Button>
-          <Button
-            variant="outline"
-            asChild
-          >
+          <Button variant="outline" asChild>
             <Link to="/channels">{t("your_feed")}</Link>
           </Button>
         </section>
@@ -128,15 +125,15 @@ export default function Index() {
 
       {isLinkAvailable && (
         <div className="text-center mt-10">
-          <Button variant="ghost" className="text-center mt-10">
-            <Link
-              to={`/channel/${encodeURIComponent(data?.rssLink)}`}
-              className="flex gap-1 items-center"
-            >
+          <Link
+            to={`/channel/${encodeURIComponent(data?.rssLink)}`}
+            className="text-center mt-10"
+          >
+            <Button variant="ghost">
               {t("go_channel_content")}{" "}
               {language === "ar" ? <ArrowLeftIcon /> : <ArrowRightIcon />}
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
       )}
     </>

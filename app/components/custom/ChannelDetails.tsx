@@ -4,7 +4,7 @@ import { Link } from "@remix-run/react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { formatIsoDateToNormalDateAndTime } from "~/lib/utils";
 import { useTranslation } from "react-i18next";
-import { Button } from "../ui/button";
+import GeneralActionsBtns from "./GeneralActionsBtns";
 
 export const ChannelDetails = ({
   feed,
@@ -24,9 +24,7 @@ export const ChannelDetails = ({
               <ExternalLinkIcon />
             </p>
           </h1>
-          <Button variant="outline">
-            <Link to="/">{t("back_to_home")}</Link>
-          </Button>
+          <GeneralActionsBtns />
         </section>
       </header>
       <section>

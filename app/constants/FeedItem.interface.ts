@@ -1,5 +1,5 @@
 export interface FeedItem {
-    title: string;
-    link: string;
-    pubDate: string;
+  title: string;
+  link: string;
+  pubDate: string;
 }

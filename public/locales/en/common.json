@@ -13,5 +13,7 @@
   "no_items": "No videos found",
   "your_feed": "Your feed",
   "enter_channel_name": "Search for your favorite channel",
-  "no_channels_found": "No channels with this name you've subscribed to"
+  "no_channels_found": "No channels with this name you've subscribed to",
+  "not_subscribed_to_any_channels": "You have not subscribed to any channels yet",
+  "go_home_and_subscribe": "Go Home and Subscribe now"
 }
