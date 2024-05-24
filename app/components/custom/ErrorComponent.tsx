@@ -1,4 +1,5 @@
 import { Link } from "@remix-run/react";
+import { useTranslation } from "react-i18next";
 
 export const ErrorComponent = ({
   error,
@@ -6,11 +7,13 @@ export const ErrorComponent = ({
 }: {
   error: string;
   linkText: string;
-}) => (
+}) => {
+  const {t} = useTranslation();
+  return (
   <div className="text-center">
     <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
-      {error}
+      {t(error)}
     </h1>
-    <Link to="/">{linkText}</Link>
+    <Link to="/">{t(linkText)}</Link>
   </div>
-);
+)};

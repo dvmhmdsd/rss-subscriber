@@ -21,8 +21,9 @@ export function formatIsoDateToNormalDateAndTime(date: string) {
   return d.toLocaleDateString() + " " + d.toLocaleTimeString();
 }
 
+export const CHANNELS_KEY = "channels_links";
+
 export const storeLink = (link: string) => {
-  const CHANNELS_KEY = "channels_links";
   const storedLinks = JSON.parse(localStorage.getItem(CHANNELS_KEY) ?? "[]");
 
   if (!storedLinks.includes(link)) {

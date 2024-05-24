@@ -4,38 +4,23 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { json, useLoaderData } from "@remix-run/react";
+import { MetaArgs, json, useLoaderData } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
 import mainPageCss from "~/styles/main-page.css?url";
 import Parser from "rss-parser";
 import { ChannelDetails } from "~/components/custom/ChannelDetails";
 import { ErrorComponent } from "~/components/custom/ErrorComponent";
 import { WithLoading } from "~/components/HOCs/WithLoading";
+import { generalMeta } from "~/constants/meta";
+import { FeedItem } from "~/constants/FeedItem.interface";
 
-export const meta: MetaFunction = () => [
-  { title: "RSS Subscriber" },
+export const meta: MetaFunction = ({ data }: MetaArgs) => [
+  { title: (data as { feed: FeedItem })?.feed?.title },
   {
     name: "description",
-    content:
-      "An RSS reader service that gets the RSS link from youtube channel and lists all the videos of your favorite channel, subscribe without clicking the subscribe button.",
+    content: "The channel's RSS feed.",
   },
-  {
-    name: "keywords",
-    content:
-      "rss, youtube, channel, subscribe, unsubscribe, video, videos, RSS, YouTube, Channel, Subscribe, Unsubscribe",
-  },
-  {
-    name: "author",
-    content: "Mohamed Saad",
-  },
-  {
-    name: "viewport",
-    content: "width=device-width, initial-scale=1",
-  },
-  {
-    name: "robots",
-    content: "index, follow",
-  },
+  ...generalMeta,
 ];
 
 export const loader: LoaderFunction = async ({
@@ -46,7 +31,7 @@ export const loader: LoaderFunction = async ({
     const feed = await parser.parseURL(params.link!);
     return json({ feed, error: "" });
   } catch (error) {
-    return json({ feed: "", error });
+    return json({ feed: null, error });
   }
 };
 
@@ -67,12 +52,9 @@ export default function SubscriptionPage() {
   );
 }
 
-export function ErrorBoundary() {
-  const { t } = useTranslation();
-  return (
-    <ErrorComponent error={t("rss_link_error")} linkText={t("back_to_home")} />
-  );
-}
+export const ErrorBoundary = () => (
+  <ErrorComponent error={"rss_link_error"} linkText={"back_to_home"} />
+);
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: mainPageCss }];

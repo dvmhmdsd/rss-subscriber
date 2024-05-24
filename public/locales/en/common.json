@@ -10,5 +10,8 @@
   "go_channel_content": "Goto channel content",
   "channel_rss": "The channel RSS link",
   "videos": "Videos",
-  "no_items": "No videos found"
+  "no_items": "No videos found",
+  "your_feed": "Your feed",
+  "enter_channel_name": "Search for your favorite channel",
+  "no_channels_found": "No channels with this name you've subscribed to"
 }

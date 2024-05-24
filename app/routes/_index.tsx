@@ -29,6 +29,7 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@radix-ui/react-icons";
 import LinkResult from "~/components/custom/LinkResult";
 import { ErrorComponent } from "~/components/custom/ErrorComponent";
 import { WithLoading } from "~/components/HOCs/WithLoading";
+import { generalMeta } from "~/constants/meta";
 
 export const meta: MetaFunction = () => [
   { title: "RSS Subscriber" },
@@ -37,22 +38,7 @@ export const meta: MetaFunction = () => [
     content:
       "An RSS reader service that gets the RSS link from youtube channel and lists all the videos of your favorite channel, subscribe without clicking the subscribe button.",
   },
-  {
-    name: "keywords",
-    content: "rss, youtube, channel, subscribe, unsubscribe, video, videos",
-  },
-  {
-    name: "author",
-    content: "Mohamed Saad",
-  },
-  {
-    name: "viewport",
-    content: "width=device-width, initial-scale=1",
-  },
-  {
-    name: "robots",
-    content: "index, follow",
-  },
+  ...generalMeta,
 ];
 
 export const loader: LoaderFunction = () => ({
@@ -87,9 +73,19 @@ export default function Index() {
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
           {name}
         </h1>
-        <Button onClick={() => changeLanguage(language === "en" ? "ar" : "en")}>
-          {t("lang")}
-        </Button>
+        <section className="w-1/12 mx-auto flex">
+          <Button
+            onClick={() => changeLanguage(language === "en" ? "ar" : "en")}
+          >
+            {t("lang")}
+          </Button>
+          <Button
+            variant="outline"
+            asChild
+          >
+            <Link to="/channels">{t("your_feed")}</Link>
+          </Button>
+        </section>
       </header>
       {transition.state === "loading" ? (
         <Skeleton className="w-[100px] h-[20px] rounded-full" />
