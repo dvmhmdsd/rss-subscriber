@@ -59,8 +59,8 @@ export default function ChannelsList() {
   return (
     <WithLoading>
       <section className="container mt-5" aria-live="polite">
-        <section className="flex justify-between">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-7   w-5/6 text-left mx-auto">
+        <section className="flex justify-between sm:flex-nowrap flex-wrap">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-7 w-5/6 text-left sm:mx-auto">
             {t("your_feed")}
           </h1>
           <Input

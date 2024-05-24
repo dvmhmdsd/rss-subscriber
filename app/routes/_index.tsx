@@ -28,7 +28,6 @@ import mainPageCss from "~/styles/main-page.css?url";
 import { ArrowRightIcon, ArrowLeftIcon } from "@radix-ui/react-icons";
 import LinkResult from "~/components/custom/LinkResult";
 import { ErrorComponent } from "~/components/custom/ErrorComponent";
-import { WithLoading } from "~/components/HOCs/WithLoading";
 import { generalMeta } from "~/constants/meta";
 
 export const meta: MetaFunction = () => [
@@ -68,12 +67,12 @@ export default function Index() {
   }, [isLinkAvailable, data?.rssLink]);
 
   return (
-    <WithLoading>
+    <>
       <header className="text-center mb-7">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
           {name}
         </h1>
-        <section className="w-1/12 mx-auto flex">
+        <section className="mx-auto flex justify-center">
           <Button
             onClick={() => changeLanguage(language === "en" ? "ar" : "en")}
           >
@@ -87,10 +86,11 @@ export default function Index() {
           </Button>
         </section>
       </header>
+
       {transition.state === "loading" ? (
         <Skeleton className="w-[100px] h-[20px] rounded-full" />
       ) : (
-        <Card className="w-5/6 mx-auto py-4">
+        <Card className="w-full sm:w-5/6 mx-auto py-4">
           <CardContent>
             <Form className="space-y-8" method="post">
               <Label htmlFor="youtubeChannelLink">
@@ -139,7 +139,7 @@ export default function Index() {
           </Button>
         </div>
       )}
-    </WithLoading>
+    </>
   );
 }
 

@@ -25,13 +25,15 @@ export default function LinkResult({ link }: Readonly<{ link: string }>) {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <div className="rounded-md border px-4 py-1 text-sm m-auto w-full flex justify-between items-center">
-            {link}
+          <h2 className="text-left block sm:hidden">{t("channel_rss")}</h2>
+          <div className="rounded-md border sm:px-4 px-2 py-1 text-sm m-auto flex justify-between items-center text-wrap w-full relative">
+            <p>{link}</p>
 
             <Button
               variant="ghost"
               onClick={handleCopyBtnClick}
               aria-label="Copy"
+              className="absolute sm:relative right-0 z-10 sm:z-0 bg-slate-50 bg-opacity-80 sm:bg-opacity-0 cursor-pointer"
             >
               {clicked ? <CheckIcon color="green" /> : <CopyIcon />}
             </Button>

@@ -15,18 +15,18 @@ export const ChannelDetails = ({
   return (
     <div className="container text-left mx-auto my-9">
       <header>
-        <section className="flex justify-between items-center">
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl flex items-center mb-7 hover:text-slate-700">
-          <Link to={feed.link} target="_blank" rel="noopener noreferrer">
-            {feed.title}
-          </Link>
-          <p className="ml-2">
-            <ExternalLinkIcon />
-          </p>
-        </h1>
-        <Button variant="outline">
-          <Link to="/">{t('back_to_home')}</Link>
-        </Button>
+        <section className="flex justify-between items-center flex-wrap mb-8">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl flex items-center hover:text-slate-700">
+            <Link to={feed.link} target="_blank" rel="noopener noreferrer">
+              {feed.title}
+            </Link>
+            <p className="ml-2">
+              <ExternalLinkIcon />
+            </p>
+          </h1>
+          <Button variant="outline">
+            <Link to="/">{t("back_to_home")}</Link>
+          </Button>
         </section>
       </header>
       <section>
@@ -49,9 +49,14 @@ export const ChannelDetails = ({
 const ChannelCard = ({ channelData }: { channelData: FeedItem }) => {
   return (
     <li key={channelData.link}>
-      <Card className="w-5/6 py-4 mb-2 hover:bg-slate-50 cursor-pointer">
+      <Card className="sm:w-5/6 py-4 mb-2 hover:bg-slate-50 cursor-pointer">
         <Link to={channelData.link} target="_blank" rel="noopener noreferrer">
-          <CardHeader className="text-xl">{channelData.title}</CardHeader>
+          <CardHeader className="text-xl flex flex-row">
+            <p>{channelData.title}</p>
+            <p className="ml-2">
+              <ExternalLinkIcon />
+            </p>
+          </CardHeader>
           <CardContent>
             <p className="text-sm text-gray-700">
               <time
